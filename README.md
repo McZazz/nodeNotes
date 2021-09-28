@@ -21,7 +21,7 @@ Connecting wires:
 Clicking an output first, then an input creates a wire. As many connections as you want can be made.
 
 Deleting wires: 
-Hover over a wire and double click.
+Hover over a wire so that it highlites, then double click it.
 
 Folder navigation: 
 Click on the summary area of a folder, it will take you inside, or, to another folder if you specified that in it's settings.
