@@ -30,7 +30,7 @@ Other tidbits:
 • Clicking the delete button in the settings of any node, or any folder that does not have other folders in it will mercelessly delete everything inside, and the node without warning.
 • If you have a folder inside, it will do nothing. It saves everything in a gaggle of JSON files automatically everytime you do anything in the app. 
 • Folders can contain any number of nodes or folders you want, or reference other folders. 
-• While in a folder, there is a button in the top-right of the screen which allows for going to the parent folder. 
+• While in a folder, there is a button in the top-left of the screen which allows for going to the parent folder. 
 • Any time you want to create a new project, just make a new copy of the nodeNotes folder, name it as you wish, and delete all the JSON files in your new copy. From there, your new project is ready to go, it will init clean new JSON files upon making hte first node or folder if it detects none present.
 
 ![image](https://user-images.githubusercontent.com/91503026/135016531-62a3995d-eda7-4650-b235-9e42feaec975.png)
