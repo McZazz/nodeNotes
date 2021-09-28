@@ -27,7 +27,7 @@ Folder navigation:
 Click on the summary area of a folder, it will take you inside, or, to another folder if you specified that in it's settings.
 
 Other tidbits: 
-• Clicking the delete button in the settings of any node, or any folder that does not have other folders in it will mercelessly delete everything inside, and the node without warning.\n
+• Clicking the delete button in the settings of any node, or any folder that does not have other folders in it will mercelessly delete everything inside, and the node without warning.
 • If you have a folder inside, it will do nothing. It saves everything in a gaggle of JSON files automatically everytime you do anything in the app. 
 • Folders can contain any number of nodes or folders you want, or reference other folders. 
 • While in a folder, there is a button in the top-right of the screen which allows for going to the parent folder. 
