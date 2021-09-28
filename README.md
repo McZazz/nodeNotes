@@ -4,13 +4,13 @@ A simple node based note making app using Flask. This is a personal project whic
 
 Installation and startup:
 
-    Install Flask for python via entering the following in your command line if running your OS's install of Python: pip install Flask
+1) Install Flask for python via entering the following in your command line if running your OS's install of Python: pip install Flask
 
-    Navigate to inside the nodeNotes folder and in the command line enter: python app.py
+2) Navigate to inside the nodeNotes folder and in the command line enter: python app.py
 
-    Python will display your local address with a port at the bottom, it is probably going to be: http://127.0.0.1:5000/
+3) Python will display your local address with a port at the bottom, it is probably going to be: http://127.0.0.1:5000/
 
-    Copy-paste the address into a browser and the app will run.
+4) Copy-paste the address into a browser and the app will run.
 
 Usage: click either the "Create Node" or "Create Folder" buttons to create and place a new node or folder.
 
