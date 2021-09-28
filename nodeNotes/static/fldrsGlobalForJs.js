@@ -1,0 +1,1 @@
+let fldrsGlobalForJs = {"allFolders": [], "parents": {}, "summaries": {"root": "Root"}, "gotos": {"root": "root"}};

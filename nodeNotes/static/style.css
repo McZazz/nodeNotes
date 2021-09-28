@@ -1,0 +1,677 @@
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+:root {
+  --nodeShadows: 0px 0px 12px 6px rgba(43, 43, 54, 0.81);
+  --nodeBG: #75829a;
+  --outer_text: #24242b;
+  --font_family: arial;
+  --font_size: 15px;
+  --font_weight: 600;
+  --buttonsHoverBG: #474d65;
+  --buttonsHoverColor: #898ba2;
+  --buttonsBoxShadow: 0 0 1vh 0.5vh rgba(41, 41, 51, 0.2);
+  --buttonsBackgroundColor: #3e4358;
+  --buttonsColor: #717386;
+  --viewPortX: 6000px;
+  --viewPortY: 3500px;
+}
+
+
+#hidden_scrollX_folder, #hidden_scrollY_folder, #hidden_scrollX_node, #hidden_scrollY_node {
+  visibility: hidden;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 0vw;
+  height: 0vh;
+}
+
+
+#viewportSizing {
+  visibility: hidden;
+  position: absolute;
+  top: var(--viewPortY);
+  left: var(--viewPortX);
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/*    ############    folder form     ##########   */
+#folderSelectorCont {
+  width: 90%;
+  height: 4vh;
+  margin: 0;
+  padding: 0;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+}
+
+#folderSelectorDisplay {
+  margin: 0;
+  padding: 0;
+  width: 97.5%;
+  height: 100%;
+  /* background-color: blue; */
+  text: var(--outer_text);
+  font-family: var(--font_family);
+  font-size: 2vh;
+  font-weight: var(--font_weight);
+  /* var(--buttonsHoverBG); */
+  /* var(--buttonsHoverColor); */
+  box-shadow: var(--buttonsBoxShadow);
+  background-color: var(--buttonsBackgroundColor);
+  color: var(--buttonsColor);
+  display: flex;
+  align-items: center;
+  padding-left: 0.3vw;
+  overflow: hidden;
+  user-select: none;
+  margin-right: 0.5vh;
+}
+
+#folderSelectorButtons {
+  margin: 0;
+  padding: 0;
+  width: 2.5%;
+  height: 100%;
+  /* background-color: green; */
+  display: flex;
+  flex-direction: column;
+}
+
+#folderSelectorUpArrow {
+  width: 100%;
+  height: 100%;
+  box-shadow: var(--buttonsBoxShadow);
+  background-color: var(--buttonsBackgroundColor);
+  margin-bottom: 0.2vh;
+}
+
+#folderSelectorDownArrow {
+  width: 100%;
+  height: 100%;
+  box-shadow: var(--buttonsBoxShadow);
+  background-color: var(--buttonsBackgroundColor);
+  margin-top: 0.2vh;
+}
+
+#folderSelectorUpArrow:hover, #folderSelectorDownArrow:hover {
+  background-color: var(--buttonsHoverBG);
+}
+
+#hiddenFolderSelection {
+  visibility: hidden;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 0vw;
+  height: 0vh;
+}
+
+#header {
+  font-family: var(--font_family);
+}
+
+#folder_edit_page {
+  visibility: hidden;
+  position: fixed;
+  /* background-color: red; */
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#folderForm {
+  box-shadow: 0 0 4vh 2vh rgba(35, 35, 46, 0.5);
+  width: 30%;
+  height: 28.5%;
+  /* visibility: visible; */
+  background-color: #2f3540;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+#folderTitle {
+  outline: none;
+  background-color: #1f232a;
+  border: 0;
+  outline: none;
+  resize: none;
+  width: 90%;
+  height: 50%;
+  color: #a4a5be;
+  padding: 1vh;
+  font-weight: 600;
+  font-size: 2vh;
+  margin: 2vh 0 0 0;
+}
+
+#folderFormButtons {
+  height: 4vh;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+
+  margin: 2vh 0 0 0;
+  /* background-color: red; */
+
+}
+
+#saveFolderData, #cancelFolderData, #deleteFolderData {
+  color: var(--buttonsColor);
+  overflow: hidden;
+  font-size: 2vh;
+  width: 33.3%;
+  height: 100%;
+  border: 0;
+  outline: none;
+  font-family: var(--font_family);
+  font-weight: var(--font_weight);
+  background-color: var(--buttonsBackgroundColor);
+  /* margin: 0 4vh 0 4vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  box-shadow: var(--buttonsBoxShadow);
+}
+#cancelFolderData {
+  margin: 0 1vh 0 1vh;
+}
+
+#saveFolderData:hover, #cancelFolderData:hover, #deleteFolderData:hover {
+  background-color: var(--buttonsHoverBG);
+  color: var(--buttonsHoverColor);
+}
+
+/* #############  current folder indicator  ############### */
+#header {
+  /* position: fixed; */
+  /* width: 90px; */
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: center; */
+  user-select: none;
+  position: fixed;
+  z-index: 10;
+  box-shadow: var(--buttonsBoxShadow);
+  background-color: var(--buttonsBackgroundColor);
+  color: var(--buttonsColor);
+  padding: 0 0 0 20px;
+  cursor: default;
+  font-weight: var(--font_weight);
+}
+#goToParent {
+  margin: 0 0 0 20px;
+}
+
+#goToParent:hover {
+  color: var(--buttonsHoverColor);
+}
+
+/* #current_folder:hover {
+  background-color: var(--buttonsHoverBG);
+  color: var(--buttonsHoverColor);
+} */
+
+#scrollX, #scrollY {
+  visibility: hidden;
+  user-select: none;
+  /* width: 0.1px; */
+  /* height: 0.1px; */
+}
+
+body {
+   position: relative;
+   background-color: #2f3540;
+}
+
+#create_node, #create_folder {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  background-color: var(--buttonsBackgroundColor);
+  padding-left: 7.5px;
+  width: 62px;
+  font-size: var(--font_size);
+  height: 50px;
+  position: fixed;
+  z-index: 10;
+  color: var(--buttonsColor);
+  /* top: 200px; */
+  left: 10px;
+  box-shadow: var(--buttonsBoxShadow);
+  font-family: var(--font_family);
+  font-weight: var(--font_weight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#create_node {
+  top: 30px;
+}
+
+#create_folder {
+  top: 92px;
+}
+
+#create_node:hover, #create_folder:hover {
+  background-color: var(--buttonsHoverBG);
+  color: var(--buttonsHoverColor);
+}
+
+.update {
+   width: 50px;
+   height: 20px;
+   background-color: blue;
+}
+
+.svg_canvas {
+   height: var(--viewPortY);
+   width: var(--viewPortX);
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: -1;
+   background-color:#00000000;
+   stroke: #171a24;
+   stroke-width: 3;
+
+}
+
+.svg_canvas .wires:hover {
+  stroke: #4e5879;
+}
+
+/* <svg class="svg_canvas" style="background-color:#00000000">
+  <line id="line2" x1="100" y1="10" x2="400" y2="1000" style="stroke:#090b10;stroke-width:2" />
+</svg> */
+
+/*     ############################################################    NOTE   ###################################################### */
+/*     ##################    THIS IS THE ONLY WAY TO GET A HIDDEN DIV TO NOT PUSH EVERYTHING ELSE AROUND RANDOMLY, HOPEFULLY...   ################ */
+#hidden_id {
+  visibility: hidden;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 0vw;
+  height: 0vh;
+}
+
+.outer_details {
+  visibility: hidden;
+  height: 0.1px;
+}
+
+/*    ###########################    */
+/*      edit page of inner node      */
+:root {
+  --edit-page-visibility: hidden;
+}
+/* flex allowed */
+#node_edit_page {
+  visibility: var(--edit-page-visibility);
+  position: fixed;
+  /* background-color: red; */
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#nodeForm {
+  box-shadow: 0 0 4vh 2vh rgba(35, 35, 46, 0.5);
+  width: 70%;
+  height: 90%;
+  visibility: var(--edit-page-visibility);
+  background-color: #2f3540;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+#summary:focus, #details:focus {
+  outline: none;
+}
+
+/*    #####################    */
+/*         form fields        */
+#summary, #details {
+  background-color: #1f232a;
+  border: 0;
+  outline: none;
+  resize: none;
+  color: #a4a5be;
+  padding: 1vh;
+  font-weight: 600;
+  font-size: 2vh;
+}
+
+#save_button, #cancel_button, #delete_button {
+  color: var(--buttonsColor);
+  font-size: 2vh;
+  width: 4vw;
+  height: 3vh;
+  border: 0;
+  outline: none;
+  font-weight: var(--font_weight);
+  font-family: var(--font_family);
+  background-color: var(--buttonsBackgroundColor);
+  margin: 0 4vh 0 4vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  box-shadow: var(--buttonsBoxShadow);
+}
+
+#save_button:hover, #cancel_button:hover, #delete_button:hover {
+  background-color: var(--buttonsHoverBG);
+  color: var(--buttonsHoverColor);
+}
+
+#edit_buttons {
+  display: flex;
+  flex-direction: row;
+  margin: 2vh 0 2vh 0;
+  height: 4vh;
+}
+
+#summary {
+  margin: 2vh 0 2vh 0;
+  width: 67.5vw;
+  height: 5vh;
+}
+
+#details {
+  width: 67.5vw;
+  height: 75vh;
+  margin: 0;
+}
+
+
+
+/* ############################ */
+/* mouse mouse_follower */
+#mouse_follower {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  background-color: #464f58;
+  width: 160px;
+  height: 76px;
+  /* top: 5px;
+  left: 20px; */
+  /* z-index: 3; */
+
+}
+
+.grabber {
+  /* background-color: #464f58; */
+  background-color: var(--nodeBG);
+  width: 100%;
+  height: 20%;
+}
+
+.node_outer {
+  background-color: #464f58;
+  background-color: var(--nodeBG);
+}
+
+.outer_summary {
+  user-select: none;
+}
+
+/* //////////////////////////// */
+/* all nodes grid areas styles */
+.nodes_header_grid {
+  /* grid-area: nodes_header_grid; */
+  margin: 0;
+  padding: 0;
+  width: 15px;
+  height: 100%;
+}
+
+.nodes_body_grid {
+  /* grid-area: nodes_body_grid; */
+  position: relative;
+  overflow:hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+}
+
+.nodes_grabber, .nodes_input, .nodes_edit_button, .nodes_output, .folder_buttons {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.nodes_input, .nodes_output, .folders_input, .folders_output {
+  height: 20%;
+  background-color: #545b66;
+  background-color: #5b6281;
+}
+.nodes_input:hover, .nodes_output:hover, .folders_input:hover, .folders_output:hover {
+  background-color: #666e8f;
+}
+
+.nodes_edit_button, .folders_edit_button {
+  height: 20%;
+  background-color: #3e4358;
+}
+.nodes_edit_button:hover, .folders_edit_button:hover {
+  background-color: #444960;
+}
+
+.nodes_grabber, .folders_grabber {
+  height: 40%;
+  background-color: #4a506a;
+}
+.nodes_grabber:hover, .folders_grabber:hover {
+  background-color: #515773;
+}
+
+
+.nodes_outer_summary {
+  padding: 5px;
+  height: 100%;
+  font-family: var(--font_family);
+  font-size: 12px;
+  color: var(--outer_text);
+  font-weight: var(--font_weight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.parent_all_nodes {
+  box-shadow: var(--nodeShadows);
+  display: flex;
+  flex-direction: row;
+  width: 160px;
+  height: 76px;
+}
+
+
+#hidden_node {
+  visibility: hidden;
+  position: absolute;
+  z-index: 3;
+}
+
+#hidden_id_folder {
+  visibility: hidden;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 0vw;
+  height: 0vh;
+}
+
+
+/* ################################## */
+/* folders */
+.folders {
+  /* box-sizing: border-box; */
+  position: absolute;
+  visibility: hidden;
+  left: 440px;
+  top: 271px;
+  user-select: none;
+  background-color: var(--nodeBG);
+
+  width: 160px;
+  height: 76px;
+
+  padding: 0;
+  margin: 0;
+
+  font-size: var(--font_size);
+  color: var(--buttonsColor);
+  /* top: 200px; */
+  box-shadow: var(--nodeShadows);
+  font-family: var(--font_family);
+  font-weight: var(--font_weight);
+  display: flex;
+  flex-direction: column;
+}
+
+.actual_folders {
+  /* box-sizing: border-box; */
+  position: absolute;
+  visibility: visible;
+  left: 440px;
+  top: 271px;
+  user-select: none;
+  background-color: var(--nodeBG);
+  /* padding: 6px 0 0 7px; */
+  /* width: 100px;
+  height: 48px; */
+  width: 160px;
+  height: 76px;
+
+  padding: 0;
+  margin: 0;
+
+  font-size: var(--font_size);
+  color: var(--buttonsColor);
+  /* top: 200px; */
+  box-shadow: var(--nodeShadows);
+  font-family: var(--font_family);
+  font-weight: var(--font_weight);
+  display: flex;
+  flex-direction: column;
+
+  color: var(--outer_text);
+  font-family: var(--font_family);
+  font-size: var(--font_size);
+  font-weight: var(--font_weight);
+}
+
+.folder_buttons_cont {
+  /* box-sizing: border-box; */
+  height: 20px;
+  width: 100%;
+
+  padding: 0;
+  margin: 0;
+
+  /* grid-area: buttons; */
+  background-color: blue;
+  display: flex;
+}
+
+
+.folders_buttons {
+  border: none;
+  width: 8.5%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.folders_grabber {
+  border: none;
+  width: 74.5%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.folders_label {
+  /* box-sizing: border-box; */
+  padding: 5px;
+  overflow: hidden;
+  margin: 0;
+  /* background-color: red; */
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  color: var(--outer_text);
+  font-family: var(--font_family);
+  font-weight: var(--font_weight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folders_label:hover {
+  background-color: #7e8ca6;
+  color: #41414e;
+}
+
+.folders_label_hidden {
+  /* box-sizing: border-box; */
+  padding: 5px;
+  overflow: hidden;
+  margin: 0;
+  /* background-color: red; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+/*  */

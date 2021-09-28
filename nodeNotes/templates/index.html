@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Document</title>
+  </head>
+  <body id="body">
+    <div id="scrollX" class="{{ scrollX }}"></div>
+    <div id="scrollY" class="{{ scrollY }}"></div>
+    <div id="header">
+      {% if currentFolder != 'root' %}
+      <div id="current_folder" class="{{ currentFolder }}">{{ 'Folder ' + currentFolder[4:] }}</div>
+      <div id="goToParent" class="{{ parent }}">Go To Parent</div>
+      {% else %}
+      <div id="current_folder" class="{{ currentFolder }}">{{ 'Root' }}</div>
+      {% endif %}
+    </div>
+
+    <div id="create_node">Create Node</div>
+
+    <div id="create_folder">Create Folder</div>
+
+    <div class="parent_all_nodes node_outer" id="hidden_node" style="visibility: hidden;">
+      <div class="nodes_header_grid">
+        <div class="nodes_input"></div>
+        <div class="nodes_grabber grabber"></div>
+        <div class="nodes_edit_button open_inner"></div>
+        <div class="nodes_output"></div>
+      </div>
+      <div class="nodes_body_grid">
+        <p class="nodes_outer_summary outer_summary"></p>
+        <div class="nodes_wires"></div>
+      </div>
+    </div>
+
+    <div id="hidden_folder" class="folders">
+        <div class="folder_buttons_cont">
+          <div class="folders_input folders_buttons"></div>
+          <div  class="folders_edit_button folders_buttons"></div>
+          <div class="folders_grabber"></div>
+          <div class="folders_output folders_buttons"></div>
+        </div>
+        <div class="folders_label_hidden"></div>
+    </div>
+
+    {% for item in nodes %}
+      <div class="parent_all_nodes node_outer" id="{{ item }}" style="{{ nodes[item]['loc'] }}">
+        <div class="nodes_header_grid">
+          <div class="nodes_input"></div>
+          <div class="nodes_grabber grabber"></div>
+          <div class="nodes_edit_button open_inner"></div>
+          <div class="nodes_output"></div>
+        </div>
+        <div class="nodes_body_grid">
+          <p class="nodes_outer_summary outer_summary">
+            {% if nodes[item]['summary']|length > 90 %}
+            {{ nodes[item]['summary'][:90] + '...' }}
+            {% else %}
+            {{ nodes[item]['summary'] }}
+            {% endif %}
+
+          </p>
+
+          <div class="nodes_wires"></div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% for item in folders %}
+      <div id="{{ item }}" class="actual_folders" style="{{ folders[item]['loc'] }}">
+          <div class="folder_buttons_cont">
+            <div class="folders_input folders_buttons"></div>
+            <div class="folders_edit_button folders_buttons"></div>
+            <div class="folders_grabber"></div>
+            <div class="folders_output folders_buttons"></div>
+          </div>
+          <div class="folders_label">
+            {% if folders[item]['summary']|length > 85 %}
+            {{ folders[item]['summary'][:85] + '...' }}
+            {% else %}
+            {{ folders[item]['summary'] }}
+            {% endif %}
+          </div>
+      </div>
+    {% endfor %}
+
+    <svg class="svg_canvas">
+      {% for item in wires %}
+          <line id="{{ item }}" class="wires" x1="{{ wires[item]['toInNode'][0] }}" y1="{{ wires[item]['toInNode'][1] }}" x2="{{ wires[item]['toOutNode'][0] }}" y2="{{ wires[item]['toOutNode'][1] }}" />
+      {% endfor %}
+    </svg>
+    <div class="blur"></div>
+
+    <div id="node_edit_page">
+      <form id="nodeForm" class="options" method="POST">
+        <textarea name="summary" id="summary" spellcheck="false" placeholder="Summary" rows="2" cols="50"></textarea>
+        <textarea name="details" id="details" spellcheck="false" placeholder="Details" rows="20" cols="50"></textarea>
+        <textarea name="hidden_scrollX_node" id="hidden_scrollX_node" rows="1" cols="1" value=""></textarea>
+        <textarea name="hidden_scrollY_node" id="hidden_scrollY_node" rows="1" cols="1" value=""></textarea>
+        <textarea name="hidden_id" id="hidden_id" rows="1" cols="1" value=""></textarea>
+        <div id="edit_buttons">
+          <button id="save_button" formaction="/save_button">Save</button>
+          <div id="cancel_button">Cancel</div>
+          <div id="delete_button">Delete</div>
+        </div>
+      </form>
+    </div>
+
+    <div id="folder_edit_page">
+      <form id="folderForm" method="POST">
+        <textarea name="folderTitle" id="folderTitle" spellcheck="false" placeholder="Title" rows="1" cols="55"></textarea>
+        <textarea name="hidden_id_folder" id="hidden_id_folder" rows="1" cols="1" value=""></textarea>
+        <textarea name="hiddenFolderSelection" id="hiddenFolderSelection" rows="1" cols="80"></textarea>
+        <textarea name="hidden_scrollX_folder" id="hidden_scrollX_folder" rows="1" cols="1" value=""></textarea>
+        <textarea name="hidden_scrollY_folder" id="hidden_scrollY_folder" rows="1" cols="1" value=""></textarea>
+        <div id="folderFormButtons">
+          <button id="saveFolderData" formaction="/save_folder_data">Save</button>
+          <div id="cancelFolderData">Cancel</div>
+          <div id="deleteFolderData">Delete</div>
+        </div>
+
+        <div id="folderSelectorCont">
+          <div id="folderSelectorDisplay"></div>
+          <div id="folderSelectorButtons">
+            <div id="folderSelectorUpArrow"></div>
+            <div id="folderSelectorDownArrow"></div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div id="viewportSizing"></div>
+    <script src="{{ url_for('static', filename='wiresOfNodes.js') }}"></script>
+    <script src="{{ url_for('static', filename='nodesForJs.js') }}"></script>
+    <script src="{{ url_for('static', filename='fldrsForJs.js') }}"></script>
+    <script src="{{ url_for('static', filename='fldrsGlobalForJs.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
