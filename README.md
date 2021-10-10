@@ -1,5 +1,7 @@
 # nodeNotes
 
+Compatible with Firefox only for the time being
+
 A simple node based note making app using Flask. This is a personal project which needs quite a bit of work, however, as-is it is pretty useful for text based brainstorming in a node based gui environment.
 
 Installation and startup:
