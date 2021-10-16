@@ -1,5 +1,5 @@
+# created by McZazz, found at https://github.com/McZazz/nodeNotes
 from flask import Flask, render_template, url_for, request, redirect
-# from node_form import Node_Form
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 import json

@@ -1,4 +1,4 @@
-// window.location.href = '/save_newnew_loc/' + id + '/' + locLeft + '/' + locTop;
+// created by McZazz, found at https://github.com/McZazz/nodeNotes
 const nodeWidthOffset = 80;
 const nodeHeightOffset = 38;
 
@@ -21,11 +21,6 @@ if (justRefreshed === 'yup') {
   // console.log('scroll has been fixed')
   justRefreshed = 'nope';
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// zoom to point
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,7 +79,6 @@ document.addEventListener('mousemove', function(event) {
     // get all it's connected wires
     // console.log(wiresOfNodes[move_node_id].ins)
 
-
     // console.log(typeof move_dataX_var)
     ////////////////////////////////////////////////// get ins of wires, ins are 2 and 3...
     if (wiresOfNodes[move_node_id]) {
@@ -133,12 +127,6 @@ document.addEventListener('mousemove', function(event) {
     ////  MOVING WIRES
     /// only outs are moving for now...
 
-    // move_node_offsetX = globalX - movingFolder.offsetLeft;
-    // move_node_offsetY = globalY - movingFolder.offsetTop;
-    //
-    // globalWirePosX = (move_dataX_var - move_node_offsetX + nodeWidthOffset).toString() + 'px';
-    // globalWirePosY = (move_dataY_var - move_node_offsetY + nodeHeightOffset).toString() + 'px';
-
     if (wiresOfNodes[movingFolderId]) {
 
       move_dataX_var = globalX;
@@ -161,8 +149,6 @@ document.addEventListener('mousemove', function(event) {
         }
       }
 
-
-
       if (ins.length > 0) {
         for (var i = 0; i < ins.length; i++) {
           move_node_offsetX = globalX - movingFolder.offsetLeft;
@@ -175,13 +161,9 @@ document.addEventListener('mousemove', function(event) {
           document.getElementById(ins[i]).attributes[3].value = globalWirePosY;
         }
       }
-
-
-
     }
   }
 });
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -224,7 +206,6 @@ window.onscroll = function(event) {
   }
   // console.log('scrollX ' + global_scrollX + ' scrollY: ' + global_scrollY);
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,8 +265,6 @@ document.addEventListener('click', function(event) {
 
     placedFolderX = event.pageX + hiddenFolderOffsetX;
     placedFolderY = event.pageY + hiddenFolderOffsetY;
-    // document.getElementById('hidden_folder').style.left = placedFolderX + 'px';
-    // document.getElementById('hidden_folder').style.top = placedFolderY + 'px';
     // console.log(event.pageX)
     window.location.href = '/save_new_folder/' + placedFolderX + '/' + placedFolderY + '/' + (global_scrollX || 0).toString() + '/' + (global_scrollY || 0).toString();  ///////////////////////////////////////////////////////////
     // document.getElementById('hidden_folder').style.visibility = 'hidden';
@@ -313,9 +292,6 @@ let move_node_offsetY = 0;
 ///////// node move mouseup
 function node_move_mouseup() {
   /// get coords as final node pos, send to python
-  // let m_upX = event.pageX;
-  // let m_upY = event.pageY;
-
   // console.log(move_node_id + ' mouseup, x: ' + move_dataX_var + ' y: ' + move_dataY_var);
   node_is_moving = false;
   // purge listener and move_data arrays
@@ -323,8 +299,6 @@ function node_move_mouseup() {
   let move_node = document.getElementById(move_node_id);
   move_node.style.zIndex = 1;
   //////////////////////////////////////////////////////////////////////////////////// needs final coords
-  // move_dataX_var = event.pageX;
-  // move_dataY_var = ;
 
   let save_new_pos = '/save_new_pos/' + (global_scrollX || 0).toString() + '/' + (global_scrollY || 0).toString() + '/' + (move_dataX_var - move_node_offsetX).toString() + '/' + (move_dataY_var - move_node_offsetY).toString() + '/' + move_node_id;
 
@@ -343,7 +317,8 @@ for (let i = 0; i < move_buttons.length; i++) {
   move_buttons[i].addEventListener('mousedown', function(event) {
     // event.preventDefault();
     event.stopPropagation();
-    move_node_id = event.originalTarget.parentNode.parentNode.id;
+    move_node_id = event.target.parentNode.parentNode.id;
+    console.log('fffffffffffffffffffffffffff',move_node_id)
     let move_node = document.getElementById(move_node_id);
 
     // console.log(event.originalTarget.parentNode.parentNode.id)
@@ -396,7 +371,7 @@ let input_buttons = document.getElementsByClassName('nodes_input');
 for (var i = 0; i < input_buttons.length; i++) {
   input_buttons[i].addEventListener('click', function(event) {
     if (output_nodeId !== '') {
-      input_nodeId = event.originalTarget.parentNode.parentNode.id;
+      input_nodeId = event.target.parentNode.parentNode.id;
       if (input_nodeId !== output_nodeId) {
         // console.log(input_nodeId + ' input was clicked')
 
@@ -441,7 +416,7 @@ for (var i = 0; i < input_buttons.length; i++) {
       /// get folder out id
       // console.log('folder out id: ' + folderWireOutId);
       //// get node in id
-      input_nodeId = event.originalTarget.parentNode.parentNode.id;
+      input_nodeId = event.target.parentNode.parentNode.id;
       // console.log('node in id: ' + input_nodeId);
 
       /// get node/folder x/y offsets
@@ -477,7 +452,7 @@ for (var i = 0; i < input_buttons.length; i++) {
 for (let i = 0; i < output_buttons.length; i++) {
   output_buttons[i].addEventListener('click', function(event) {
     if (output_nodeId === '') {
-      output_nodeId = event.originalTarget.parentNode.parentNode.id;
+      output_nodeId = event.target.parentNode.parentNode.id;
       // console.log(output_nodeId + ' output was clicked');
     } else {
       output_nodeId = '';
@@ -496,7 +471,7 @@ let delete_wire_id = '';
 let all_wires = document.getElementsByClassName('wires');
 for (var i = 0; i < all_wires.length; i++) {
   all_wires[i].addEventListener('dblclick', function(event) {
-    delete_wire_id = event.originalTarget.id;
+    delete_wire_id = event.target.id;
     // console.log(delete_wire_id);
     window.location.href = '/delete_wire/' + delete_wire_id;
     //////////////////////////////////////// go to python route to delete
@@ -512,7 +487,7 @@ let edit_form_visible = false;
 for (var i = 0; i < edit_buttons.length; i++) {
   edit_buttons[i].addEventListener('click', function(event) {
     event.stopPropagation();
-    editing_this_nodeId = event.originalTarget.parentNode.parentNode.id;
+    editing_this_nodeId = event.target.parentNode.parentNode.id;
     // console.log('editing: ' + editing_this_nodeId)
 
     /////////////////////////////////////////////////////
@@ -535,7 +510,6 @@ for (var i = 0; i < edit_buttons.length; i++) {
     document.getElementById('nodeForm').style.visibility = 'visible';
 
     //// note, the data for save button is submettted by html via button click, straight to python
-
   });
 }
 
@@ -556,7 +530,6 @@ document.getElementById('cancel_button').addEventListener('click', function(even
   document.getElementById('nodeForm').style.visibility = 'hidden';
 });
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // FOLDERS
@@ -570,7 +543,6 @@ let folderHeightOffset = 0;
 
 let hiddenFolderOffsetX = -nodeWidthOffset;
 let hiddenFolderOffsetY = -nodeHeightOffset;
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //////////////// CREATE FOLDER
@@ -601,7 +573,7 @@ let movingFolderOffsetY = 0;
 let foldersGrabber = document.getElementsByClassName('folders_grabber');
 for (var i = 0; i < foldersGrabber.length; i++) {
   foldersGrabber[i].addEventListener('mousedown', function(event) {
-    movingFolderId = event.originalTarget.parentNode.parentNode.id;
+    movingFolderId = event.target.parentNode.parentNode.id;
     let theMovingFolder = document.getElementById(movingFolderId);
 
     theMovingFolder.style.zIndex = '3';
@@ -628,7 +600,6 @@ for (var i = 0; i < foldersGrabber.length; i++) {
     document.addEventListener('mouseup', movingFolderMouseUp);
   });
 }
-
 
 /////////////////////////////////////////////////////////////////////////
 // MOVE FOLDER MOUSEUP
@@ -677,7 +648,7 @@ for (var i = 0; i < foldersEditButton.length; i++) {
     document.getElementById('hidden_scrollX_folder').value = (global_scrollX || 0).toString();
     document.getElementById('hidden_scrollY_folder').value = (global_scrollY || 0).toString();
 
-    editingThisFolder = event.originalTarget.parentNode.parentNode.id;
+    editingThisFolder = event.target.parentNode.parentNode.id;
     // console.log('editing this folder: ' + editingThisFolder);
 
     document.getElementById('hidden_id_folder').value = editingThisFolder;
@@ -755,9 +726,6 @@ document.getElementById('folderSelectorDownArrow').addEventListener('click', fun
 /////////////////////////////////////////////////
 ///////////////// spinner down button
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////
 /////////////////////// CANCEL FOLDER EDIT
 document.getElementById('cancelFolderData').addEventListener('click', function() {
@@ -777,7 +745,7 @@ let folder_switch_buttons = document.getElementsByClassName('folders_label');
 if (folder_switch_buttons !== null) {
   for (var i = 0; i < folder_switch_buttons.length; i++) {
     folder_switch_buttons[i].addEventListener('click', function(event) {
-      let folderId = event.originalTarget.parentNode.id;
+      let folderId = event.target.parentNode.id;
       // console.log('folderId: ' + folderId)
       window.location.href = '/switch_folder/' + fldrsGlobalForJs['gotos'][folderId];
     });
@@ -799,7 +767,6 @@ if (goToParent !== null) {
   });
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 ///////// CREATE FOLDER WIRE
 let folderWireIsOpen = false;
@@ -813,7 +780,7 @@ for (var i = 0; i < folderInputs.length; i++) {
   folderOutputs[i].addEventListener('click', function(event) {
     if (folderWireIsOpen === false) {
       folderWireIsOpen = true;
-      folderWireOutId = event.originalTarget.parentNode.parentNode.id;
+      folderWireOutId = event.target.parentNode.parentNode.id;
       // console.log(folderWireOutId + ' output has been clicked')
     } else {
       folderWireIsOpen = false;
@@ -824,7 +791,7 @@ for (var i = 0; i < folderInputs.length; i++) {
   });
 
   folderInputs[i].addEventListener('click', function(event) {
-    folderWireInId = event.originalTarget.parentNode.parentNode.id;
+    folderWireInId = event.target.parentNode.parentNode.id;
     if (folderWireIsOpen === true && folderWireOutId !== folderWireInId) {
       // console.log(folderWireInId + ' input has been clicked, folder to folder wire created')   ///////////////////////////////////////////////////////////////////
 
@@ -897,7 +864,5 @@ for (var i = 0; i < folderInputs.length; i++) {
     }
   });
 }
-
-
 
 ////////
