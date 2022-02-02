@@ -1,5 +1,5 @@
-# created by McZazz, found at https://github.com/McZazz/nodeNotes
 from flask import Flask, render_template, url_for, request, redirect
+# from node_form import Node_Form
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 import json
@@ -206,17 +206,20 @@ def index():
     # {"allFolders": ["fldr1", "fldr2"], "parents": {"fldr1": "root", "fldr2": "fldr1"}}
     if data.currentFolder != 'root':
         if data.currentFolder in data.fldrsGlobal['parents']:
+            currFolderTitle = data.fldrsGlobal['summaries'][data.currentFolder]
             parent = data.fldrsGlobal['parents'][data.currentFolder]
         else:
+            currFolderTitle = ''
             parent = ''
     else:
+        currFolderTitle = ''
         parent = ''
 
     gotoDisplay = data.fldrsGlobal['gotos']
     # print(gotoDisplay)
     gotoSummaries = data.fldrsGlobal['summaries']
 
-    return render_template('index.html', nodes=data.nodes, wires=data.wires, gotoDisplay=gotoDisplay, folders=data.fldrs, scrollX=data.scrollX, scrollY=data.scrollY, currentFolder=data.currentFolder, parent=parent)
+    return render_template('index.html', nodes=data.nodes, wires=data.wires, gotoDisplay=gotoDisplay, folders=data.fldrs, scrollX=data.scrollX, scrollY=data.scrollY, currentFolder=data.currentFolder, parent=parent, currFolderTitle=currFolderTitle)
 
 
 @app.route('/save_new_node/<string:placedX>/<string:placedY>/<string:global_scrollX>/<string:global_scrollY>')
