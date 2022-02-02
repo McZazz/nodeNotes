@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- created by McZazz, found at https://github.com/McZazz/nodeNotes -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,7 +12,7 @@
     <div id="scrollY" class="{{ scrollY }}"></div>
     <div id="header">
       {% if currentFolder != 'root' %}
-      <div id="current_folder" class="{{ currentFolder }}">{{ 'Folder ' + currentFolder[4:] }}</div>
+      <div id="current_folder" class="{{ currentFolder }}">{{ currFolderTitle }}</div>
       <div id="goToParent" class="{{ parent }}">Go To Parent</div>
       {% else %}
       <div id="current_folder" class="{{ currentFolder }}">{{ 'Root' }}</div>
